@@ -319,7 +319,6 @@ def app():
             with st.expander("Customize administrative boundary", False):
 
                 overlay_options = {
-,
                 }
 
                 overlay = st.selectbox(
