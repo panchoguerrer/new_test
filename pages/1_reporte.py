@@ -305,14 +305,14 @@ def app():
             st.session_state["palette"] = eval(palette)
 
         sample_roi = st.selectbox(
-            "Elija su archivo:",
+            "Elija su archivo",
             roi_options,
             index=0,
         )
 
-        #add_outline = st.checkbox(
-        #    "Overlay an administrative boundary on timelapse", False
-        #)
+        add_outline = st.checkbox(
+            "Overlay an administrative boundary on timelapse", False
+        )
 
         if add_outline:
 
