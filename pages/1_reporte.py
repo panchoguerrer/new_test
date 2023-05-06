@@ -124,8 +124,8 @@ def app():
             "Elija el sensor de preferencia: ",
             [
              
-                "Landsat TM-ETM-OLI Surface Reflectance",
-                "Sentinel-2 MSI Surface Reflectance",
+                "Landsat",
+                "Sentinel 2",
             
             ],
             index=1,
