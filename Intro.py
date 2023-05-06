@@ -20,7 +20,7 @@ st.markdown(
     """
 )
 
-st.header("Instrucciones")
+st.header("")
 
 markdown = """
 
