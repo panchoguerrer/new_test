@@ -20,187 +20,33 @@ def ee_authenticate(token_name="EARTHENGINE_TOKEN"):
     geemap.ee_initialize(token_name=token_name)
 
 
-st.sidebar.info(
-    """
-    - Web App URL: <https://streamlit.geemap.org>
-    - GitHub repository: <https://github.com/giswqs/streamlit-geospatial>
-    """
-)
-
-st.sidebar.title("Contact")
-st.sidebar.info(
-    """
-    Qiusheng Wu: <https://wetlands.io>
-    [GitHub](https://github.com/giswqs) | [Twitter](https://twitter.com/giswqs) | [YouTube](https://www.youtube.com/c/QiushengWu) | [LinkedIn](https://www.linkedin.com/in/qiushengwu)
-    """
-)
-
-goes_rois = {
-    "Creek Fire, CA (2020-09-05)": {
-        "region": Polygon(
-            [
-                [-121.003418, 36.848857],
-                [-121.003418, 39.049052],
-                [-117.905273, 39.049052],
-                [-117.905273, 36.848857],
-                [-121.003418, 36.848857],
-            ]
-        ),
-        "start_time": "2020-09-05T15:00:00",
-        "end_time": "2020-09-06T02:00:00",
-    },
-    "Bomb Cyclone (2021-10-24)": {
-        "region": Polygon(
-            [
-                [-159.5954, 60.4088],
-                [-159.5954, 24.5178],
-                [-114.2438, 24.5178],
-                [-114.2438, 60.4088],
-            ]
-        ),
-        "start_time": "2021-10-24T14:00:00",
-        "end_time": "2021-10-25T01:00:00",
-    },
-    "Hunga Tonga Volcanic Eruption (2022-01-15)": {
-        "region": Polygon(
-            [
-                [-192.480469, -32.546813],
-                [-192.480469, -8.754795],
-                [-157.587891, -8.754795],
-                [-157.587891, -32.546813],
-                [-192.480469, -32.546813],
-            ]
-        ),
-        "start_time": "2022-01-15T03:00:00",
-        "end_time": "2022-01-15T07:00:00",
-    },
-    "Hunga Tonga Volcanic Eruption Closer Look (2022-01-15)": {
-        "region": Polygon(
-            [
-                [-178.901367, -22.958393],
-                [-178.901367, -17.85329],
-                [-171.452637, -17.85329],
-                [-171.452637, -22.958393],
-                [-178.901367, -22.958393],
-            ]
-        ),
-        "start_time": "2022-01-15T03:00:00",
-        "end_time": "2022-01-15T07:00:00",
-    },
-}
-
 
 landsat_rois = {
-    "Aral Sea": Polygon(
+    "Pergamino": Polygon(
         [
-            [57.667236, 43.834527],
-            [57.667236, 45.996962],
-            [61.12793, 45.996962],
-            [61.12793, 43.834527],
-            [57.667236, 43.834527],
+            [-60.745468, -33.801974],
+            [-60.745468, -33.741471],
+            [-60.678177, -33.741471],
+            [-60.678177, -33.801974],
+            [-60.745468, -33.801974],
         ]
     ),
-    "Dubai": Polygon(
+    "Balcarce": Polygon(
         [
-            [54.541626, 24.763044],
-            [54.541626, 25.427152],
-            [55.632019, 25.427152],
-            [55.632019, 24.763044],
-            [54.541626, 24.763044],
+            [-58.266678, -37.709628],
+            [-58.266678, -37.685451],
+            [-58.215523, -37.685451],
+            [-58.215523, -37.709628],
+            [-58.266678, -37.709628],
         ]
     ),
-    "Hong Kong International Airport": Polygon(
+    "Traful": Polygon(
         [
-            [113.825226, 22.198849],
-            [113.825226, 22.349758],
-            [114.085121, 22.349758],
-            [114.085121, 22.198849],
-            [113.825226, 22.198849],
-        ]
-    ),
-    "Las Vegas, NV": Polygon(
-        [
-            [-115.554199, 35.804449],
-            [-115.554199, 36.558188],
-            [-113.903503, 36.558188],
-            [-113.903503, 35.804449],
-            [-115.554199, 35.804449],
-        ]
-    ),
-    "Pucallpa, Peru": Polygon(
-        [
-            [-74.672699, -8.600032],
-            [-74.672699, -8.254983],
-            [-74.279938, -8.254983],
-            [-74.279938, -8.600032],
-        ]
-    ),
-    "Sierra Gorda, Chile": Polygon(
-        [
-            [-69.315491, -22.837104],
-            [-69.315491, -22.751488],
-            [-69.190006, -22.751488],
-            [-69.190006, -22.837104],
-            [-69.315491, -22.837104],
-        ]
-    ),
-}
-
-modis_rois = {
-    "World": Polygon(
-        [
-            [-171.210938, -57.136239],
-            [-171.210938, 79.997168],
-            [177.539063, 79.997168],
-            [177.539063, -57.136239],
-            [-171.210938, -57.136239],
-        ]
-    ),
-    "Africa": Polygon(
-        [
-            [-18.6983, 38.1446],
-            [-18.6983, -36.1630],
-            [52.2293, -36.1630],
-            [52.2293, 38.1446],
-        ]
-    ),
-    "USA": Polygon(
-        [
-            [-127.177734, 23.725012],
-            [-127.177734, 50.792047],
-            [-66.269531, 50.792047],
-            [-66.269531, 23.725012],
-            [-127.177734, 23.725012],
-        ]
-    ),
-}
-
-ocean_rois = {
-    "Gulf of Mexico": Polygon(
-        [
-            [-101.206055, 15.496032],
-            [-101.206055, 32.361403],
-            [-75.673828, 32.361403],
-            [-75.673828, 15.496032],
-            [-101.206055, 15.496032],
-        ]
-    ),
-    "North Atlantic Ocean": Polygon(
-        [
-            [-85.341797, 24.046464],
-            [-85.341797, 45.02695],
-            [-55.810547, 45.02695],
-            [-55.810547, 24.046464],
-            [-85.341797, 24.046464],
-        ]
-    ),
-    "World": Polygon(
-        [
-            [-171.210938, -57.136239],
-            [-171.210938, 79.997168],
-            [177.539063, 79.997168],
-            [177.539063, -57.136239],
-            [-171.210938, -57.136239],
+            [-71.582794, -40.568589],
+            [-71.582794, -40.514321],
+            [-71.460228, -40.514321],
+            [-71.460228, -40.568589],
+            [-71.582794, -40.568589],
         ]
     ),
 }
@@ -232,13 +78,10 @@ def app():
 
     today = date.today()
 
-    st.title("Create Satellite Timelapse")
+    st.title("Titulo")
 
     st.markdown(
-        """
-        An interactive web app for creating [Landsat](https://developers.google.com/earth-engine/datasets/catalog/landsat)/[GOES](https://jstnbraaten.medium.com/goes-in-earth-engine-53fbc8783c16) timelapse for any location around the globe. 
-        The app was built using [streamlit](https://streamlit.io), [geemap](https://geemap.org), and [Google Earth Engine](https://earthengine.google.com). For more info, check out my streamlit [blog post](https://blog.streamlit.io/creating-satellite-timelapse-with-streamlit-and-earth-engine). 
-    """
+        """ """
     )
 
     row1_col1, row1_col2 = st.columns([2, 1])
@@ -260,11 +103,11 @@ def app():
             locate_control=True,
             plugin_LatLngPopup=False,
         )
-        m.add_basemap("ROADMAP")
+        m.add_basemap("HYBRID")
 
     with row1_col2:
 
-        keyword = st.text_input("Search for a location:", "")
+        keyword = st.text_input("Ciudad mas cercana:", "")
         if keyword:
             locations = geemap.geocode(keyword)
             if locations is not None and len(locations) > 0:
@@ -278,25 +121,21 @@ def app():
                 st.session_state["zoom_level"] = 12
 
         collection = st.selectbox(
-            "Select a satellite image collection: ",
+            "Elija el sensor de preferencia: ",
             [
-                "Any Earth Engine ImageCollection",
+             
                 "Landsat TM-ETM-OLI Surface Reflectance",
                 "Sentinel-2 MSI Surface Reflectance",
-                "Geostationary Operational Environmental Satellites (GOES)",
-                "MODIS Vegetation Indices (NDVI/EVI) 16-Day Global 1km",
-                "MODIS Gap filled Land Surface Temperature Daily",
-                "MODIS Ocean Color SMI",
-                "USDA National Agriculture Imagery Program (NAIP)",
+            
             ],
             index=1,
         )
 
         if collection in [
-            "Landsat TM-ETM-OLI Surface Reflectance",
-            "Sentinel-2 MSI Surface Reflectance",
+            "Landsat",
+            "Sentinel 2",
         ]:
-            roi_options = ["Uploaded GeoJSON"] + list(landsat_rois.keys())
+            roi_options = ["My campo GeoJSON"] + list(landsat_rois.keys())
 
         elif collection == "Geostationary Operational Environmental Satellites (GOES)":
             roi_options = ["Uploaded GeoJSON"] + list(goes_rois.keys())
@@ -336,8 +175,7 @@ def app():
                         index = asset_titles.index(dataset)
                         html = geemap.ee_data_html(st.session_state["ee_assets"][index])
                         st.markdown(html, True)
-            # elif collection == "MODIS Gap filled Land Surface Temperature Daily":
-            #     ee_id = ""
+
             else:
                 ee_id = ""
 
