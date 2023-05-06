@@ -457,18 +457,11 @@ def app():
                 RGB = st.selectbox(
                     "Elija una combinacion:",
                     [
- #                       "Red/Green/Blue",
+#                       "Red/Green/Blue",
                         "NIR/Red/Green",
- #                       "SWIR2/SWIR1/NIR",
+#                       "SWIR2/SWIR1/NIR",
                         "NIR/SWIR1/Red",
-  #                      "SWIR2/NIR/Red",
-   #                     "SWIR2/SWIR1/Red",
-    #                    "SWIR1/NIR/Blue",
-     #                   "NIR/SWIR1/Blue",
-      #                  "SWIR2/NIR/Green",
- #                       "SWIR1/NIR/Red",
- #                       "SWIR2/NIR/SWIR1",
- #                       "SWIR1/NIR/SWIR2",
+                        "SWIR1/NIR/SWIR2",
                     ],
                     index=9,
                 )
@@ -485,9 +478,9 @@ def app():
                     dimensions = st.slider(
                         "Maximum dimensions (Width*Height) in pixels", 768, 2000, 768
                     )
-                    progress_bar_color = st.color_picker(
-                        "Progress bar color:", "#0000ff"
-                    )
+                    #progress_bar_color = st.color_picker(
+                    #    "Progress bar color:", "#0000ff"
+                    #)
                     years = st.slider(
                         "Start and end year:",
                         sensor_start_year,
@@ -495,35 +488,35 @@ def app():
                         (sensor_start_year, today.year),
                     )
                     months = st.slider("Start and end month:", 1, 12, (1, 12))
-                    font_size = st.slider("Font size:", 10, 50, 30)
-                    font_color = st.color_picker("Font color:", "#ffffff")
-                    apply_fmask = st.checkbox(
-                        "Apply fmask (remove clouds, shadows, snow)", True
-                    )
-                    font_type = st.selectbox(
-                        "Select the font type for the title:",
-                        ["arial.ttf", "alibaba.otf"],
-                        index=0,
-                    )
-                    fading = st.slider(
-                        "Fading duration (seconds) for each frame:", 0.0, 3.0, 0.0
-                    )
-                    mp4 = st.checkbox("Save timelapse as MP4", True)
+                    #font_size = st.slider("Font size:", 10, 50, 30)
+                    #font_color = st.color_picker("Font color:", "#ffffff")
+                    #apply_fmask = st.checkbox(
+                    #    "Apply fmask (remove clouds, shadows, snow)", True
+                    #)
+                    #font_type = st.selectbox(
+                    #    "Select the font type for the title:",
+                    #    ["arial.ttf", "alibaba.otf"],
+                    #    index=0,
+                    #)
+                    #fading = st.slider(
+                    #    "Fading duration (seconds) for each frame:", 0.0, 3.0, 0.0
+                    #)
+                    mp4 = st.checkbox("Descargar Archivo", True)
 
                 empty_text = st.empty()
                 empty_image = st.empty()
                 empty_fire_image = st.empty()
                 empty_video = st.container()
-                submitted = st.form_submit_button("Submit")
+                submitted = st.form_submit_button("Ejecutar")
                 if submitted:
 
                     if sample_roi == "Su Campo" and data is None:
                         empty_text.warning(
-                            "Steps to create a timelapse: Draw a rectangle on the map -> Export it as a GeoJSON -> Upload it back to the app -> Click the Submit button. Alternatively, you can select a sample ROI from the dropdown list."
+                            "Por favor cree un poligono, o seleccione de la lista."
                         )
                     else:
 
-                        empty_text.text("Computing... Please wait...")
+                        empty_text.text("Trabajando en su pedido")
 
                         start_year = years[0]
                         end_year = years[1]
@@ -532,7 +525,7 @@ def app():
                         bands = RGB.split("/")
 
                         try:
-                            if collection == "Landsat TM-ETM-OLI Surface Reflectance":
+                            if collection == "Landsat":
                                 out_gif = geemap.landsat_timelapse(
                                     roi=roi,
                                     out_gif=out_gif,
@@ -541,14 +534,14 @@ def app():
                                     start_date=start_date,
                                     end_date=end_date,
                                     bands=bands,
-                                    apply_fmask=apply_fmask,
+                                    #apply_fmask=apply_fmask,
                                     frames_per_second=speed,
                                     # dimensions=dimensions,
                                     dimensions=768,
-                                    overlay_data=overlay_data,
-                                    overlay_color=overlay_color,
-                                    overlay_width=overlay_width,
-                                    overlay_opacity=overlay_opacity,
+                                    #overlay_data=overlay_data,
+                                    #o#verlay_color=overlay_color,
+                                    #erlay_width=overlay_width,
+                                    #overlay_opacity=overlay_opacity,
                                     frequency=frequency,
                                     date_format=None,
                                     title=title,
@@ -556,17 +549,17 @@ def app():
                                     add_text=True,
                                     text_xy=("2%", "2%"),
                                     text_sequence=None,
-                                    font_type=font_type,
-                                    font_size=font_size,
-                                    font_color=font_color,
-                                    add_progress_bar=True,
-                                    progress_bar_color=progress_bar_color,
-                                    progress_bar_height=5,
+                                    #font_type=font_type,
+                                    #font_size=font_size,
+                                    #ont_color=font_color,
+                                    #dd_progress_bar=True,
+                                    #progress_bar_color=progress_bar_color,
+                                    #progress_bar_height=5,
                                     loop=0,
                                     mp4=mp4,
-                                    fading=fading,
+                                    #fading=fading,
                                 )
-                            elif collection == "Sentinel-2 MSI Surface Reflectance":
+                            elif collection == "Sentinel 2":
                                 out_gif = geemap.sentinel2_timelapse(
                                     roi=roi,
                                     out_gif=out_gif,
@@ -575,14 +568,14 @@ def app():
                                     start_date=start_date,
                                     end_date=end_date,
                                     bands=bands,
-                                    apply_fmask=apply_fmask,
+                                   # apply_fmask=apply_fmask,
                                     frames_per_second=speed,
                                     dimensions=768,
                                     # dimensions=dimensions,
-                                    overlay_data=overlay_data,
-                                    overlay_color=overlay_color,
-                                    overlay_width=overlay_width,
-                                    overlay_opacity=overlay_opacity,
+                                    #overlay_data=overlay_data,
+                                    #overlay_color=overlay_color,
+                                    #overlay_width=overlay_width,
+                                    #overlay_opacity=overlay_opacity,
                                     frequency=frequency,
                                     date_format=None,
                                     title=title,
@@ -590,26 +583,26 @@ def app():
                                     add_text=True,
                                     text_xy=("2%", "2%"),
                                     text_sequence=None,
-                                    font_type=font_type,
-                                    font_size=font_size,
-                                    font_color=font_color,
-                                    add_progress_bar=True,
-                                    progress_bar_color=progress_bar_color,
-                                    progress_bar_height=5,
+                                    #font_type=font_type,
+                                    #font_size=font_size,
+                                    #font_color=font_color,
+                                    #add_progress_bar=True,
+                                    #progress_bar_color=progress_bar_color,
+                                    #progress_bar_height=5,
                                     loop=0,
                                     mp4=mp4,
-                                    fading=fading,
+                                    #fading=fading,
                                 )
                         except:
                             empty_text.error(
-                                "An error occurred while computing the timelapse. Your probably requested too much data. Try reducing the ROI or timespan."
+                                "mmm algo sucedio con su pedido, intente seleccionar un area reducida, o menor rango de tiempo"
                             )
                             st.stop()
 
                         if out_gif is not None and os.path.exists(out_gif):
 
                             empty_text.text(
-                                "Right click the GIF to save it to your computer👇"
+                                ""
                             )
                             empty_image.image(out_gif)
 
@@ -617,15 +610,14 @@ def app():
                             if mp4 and os.path.exists(out_mp4):
                                 with empty_video:
                                     st.text(
-                                        "Right click the MP4 to save it to your computer👇"
+                                        ""
                                     )
                                     st.video(out_gif.replace(".gif", ".mp4"))
 
                         else:
                             empty_text.error(
-                                "Something went wrong. You probably requested too much data. Try reducing the ROI or timespan."
+                                "mmm algo sucedio con su pedido, intente seleccionar un area reducida, o menor rango de tiempo"
                             )
-
         elif collection == "Geostationary Operational Environmental Satellites (GOES)":
 
             video_empty.video("https://youtu.be/16fA2QORG4A")
