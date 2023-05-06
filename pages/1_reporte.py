@@ -435,12 +435,12 @@ def app():
         ]:
 
             if collection == "Landsat":
-                sensor_start_year = 2000
-                timelapse_title = "Landsat "
+                sensor_start_year = 1984
+                timelapse_title = "Landsat Timelapse"
                 timelapse_speed = 5
             elif collection == "Sentinel 2":
-                sensor_start_year = 2016
-                timelapse_title = "Sentinel 2"
+                sensor_start_year = 2015
+                timelapse_title = "Sentinel-2 Timelapse"
                 timelapse_speed = 5
             video_empty.video("https://www.youtube.com/watch?v=O8_WJIzN43E")
 
@@ -452,15 +452,22 @@ def app():
                 out_gif = geemap.temp_file_path(".gif")
 
                 title = st.text_input(
-                    "Titulo: ", timelapse_title
+                    "Ingrese un titulo: ", timelapse_title
                 )
                 RGB = st.selectbox(
-                    "Elija una combinacion:",
+                    "Combinacion:",
                     [
-#                       "Red/Green/Blue",
+                        "Red/Green/Blue",
                         "NIR/Red/Green",
-#                       "SWIR2/SWIR1/NIR",
+                        "SWIR2/SWIR1/NIR",
                         "NIR/SWIR1/Red",
+                        "SWIR2/NIR/Red",
+                        "SWIR2/SWIR1/Red",
+                        "SWIR1/NIR/Blue",
+                        "NIR/SWIR1/Blue",
+                        "SWIR2/NIR/Green",
+                        "SWIR1/NIR/Red",
+                        "SWIR2/NIR/SWIR1",
                         "SWIR1/NIR/SWIR2",
                     ],
                     index=9,
@@ -471,7 +478,7 @@ def app():
                     ["year", "quarter", "month"],
                     index=0,
                 )
-
+ 
                 with st.expander("Ajustes"):
 
                     speed = st.slider("Frames per second:", 1, 30, timelapse_speed)
