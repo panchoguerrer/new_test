@@ -442,7 +442,7 @@ def app():
                 sensor_start_year = 2015
                 timelapse_title = "Sentinel-2 Timelapse"
                 timelapse_speed = 5
-            video_empty.video("https://www.youtube.com/watch?v=O8_WJIzN43E")
+            #video_empty.video("https://www.youtube.com/watch?v=O8_WJIzN43E")
 
             with st.form("submit_landsat_form"):
 
