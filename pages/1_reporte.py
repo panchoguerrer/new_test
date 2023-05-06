@@ -134,20 +134,20 @@ def app():
             "Landsat",
             "Sentinel 2",
         ]:
-            roi_options = ["Uploaded GeoJSON"] + list(landsat_rois.keys())
+            roi_options = ["Su Campo"] + list(landsat_rois.keys())
 
         elif collection == "Geostationary Operational Environmental Satellites (GOES)":
-            roi_options = ["Uploaded GeoJSON"] + list(goes_rois.keys())
+            roi_options = ["Su Campo"] + list(goes_rois.keys())
 
         elif collection in [
             "MODIS Vegetation Indices (NDVI/EVI) 16-Day Global 1km",
             "MODIS Gap filled Land Surface Temperature Daily",
         ]:
-            roi_options = ["Uploaded GeoJSON"] + list(modis_rois.keys())
+            roi_options = ["Su Campo"] + list(modis_rois.keys())
         elif collection == "MODIS Ocean Color SMI":
-            roi_options = ["Uploaded GeoJSON"] + list(ocean_rois.keys())
+            roi_options = ["Su Campo"] + list(ocean_rois.keys())
         else:
-            roi_options = ["Uploaded GeoJSON"]
+            roi_options = ["Su Campo"]
 
         if collection == "Any Earth Engine ImageCollection":
             keyword = st.text_input("Enter a keyword to search (e.g., MODIS):", "")
@@ -348,7 +348,7 @@ def app():
         )
 
         crs = "epsg:4326"
-        if sample_roi == "Uploaded GeoJSON":
+        if sample_roi == "Su Campo":
             if data is None:
                 # st.info(
                 #     "Steps to create a timelapse: Draw a rectangle on the map -> Export it as a GeoJSON -> Upload it back to the app -> Click Submit button"
@@ -380,7 +380,7 @@ def app():
                     index=[0], crs=crs, geometry=[modis_rois[sample_roi]]
                 )
 
-        if sample_roi != "Uploaded GeoJSON":
+        if sample_roi != "Su Campo":
 
             if collection in [
                 "Landsat TM-ETM-OLI Surface Reflectance",
@@ -517,7 +517,7 @@ def app():
                 submitted = st.form_submit_button("Submit")
                 if submitted:
 
-                    if sample_roi == "Uploaded GeoJSON" and data is None:
+                    if sample_roi == "Su Campo" and data is None:
                         empty_text.warning(
                             "Steps to create a timelapse: Draw a rectangle on the map -> Export it as a GeoJSON -> Upload it back to the app -> Click the Submit button. Alternatively, you can select a sample ROI from the dropdown list."
                         )
@@ -641,7 +641,7 @@ def app():
                 earliest_date = datetime.date(2017, 7, 10)
                 latest_date = datetime.date.today()
 
-                if sample_roi == "Uploaded GeoJSON":
+                if sample_roi == "Su Campo":
                     roi_start_date = today - datetime.timedelta(days=2)
                     roi_end_date = today - datetime.timedelta(days=1)
                     roi_start_time = datetime.time(14, 00)
@@ -710,7 +710,7 @@ def app():
 
                 submitted = st.form_submit_button("Submit")
                 if submitted:
-                    if sample_roi == "Uploaded GeoJSON" and data is None:
+                    if sample_roi == "Su Campo" and data is None:
                         empty_text.warning(
                             "Steps to create a timelapse: Draw a rectangle on the map -> Export it as a GeoJSON -> Upload it back to the app -> Click the Submit button. Alternatively, you can select a sample ROI from the dropdown list."
                         )
@@ -838,7 +838,7 @@ def app():
 
                 submitted = st.form_submit_button("Submit")
                 if submitted:
-                    if sample_roi == "Uploaded GeoJSON" and data is None:
+                    if sample_roi == "Su Campo" and data is None:
                         empty_text.warning(
                             "Steps to create a timelapse: Draw a rectangle on the map -> Export it as a GeoJSON -> Upload it back to the app -> Click the Submit button. Alternatively, you can select a sample ROI from the dropdown list."
                         )
@@ -950,7 +950,7 @@ def app():
                 submitted = st.form_submit_button("Submit")
                 if submitted:
 
-                    if sample_roi == "Uploaded GeoJSON" and data is None:
+                    if sample_roi == "Su Campo" and data is None:
                         empty_text.warning(
                             "Steps to create a timelapse: Draw a rectangle on the map -> Export it as a GeoJSON -> Upload it back to the app -> Click the Submit button. Alternatively, you can select a sample ROI from the dropdown list."
                         )
@@ -1078,7 +1078,7 @@ def app():
                 submitted = st.form_submit_button("Submit")
                 if submitted:
 
-                    if sample_roi == "Uploaded GeoJSON" and data is None:
+                    if sample_roi == "Su Campo" and data is None:
                         empty_text.warning(
                             "Steps to create a timelapse: Draw a rectangle on the map -> Export it as a GeoJSON -> Upload it back to the app -> Click the Submit button. Alternatively, you can select a sample ROI from the dropdown list."
                         )
@@ -1246,7 +1246,7 @@ def app():
                 submitted = st.form_submit_button("Submit")
                 if submitted:
 
-                    if sample_roi == "Uploaded GeoJSON" and data is None:
+                    if sample_roi == "Su Campo" and data is None:
                         empty_text.warning(
                             "Steps to create a timelapse: Draw a rectangle on the map -> Export it as a GeoJSON -> Upload it back to the app -> Click the Submit button. Alternatively, you can select a sample ROI from the dropdown list."
                         )
