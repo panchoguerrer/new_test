@@ -383,8 +383,8 @@ def app():
         if sample_roi != "Su Campo":
 
             if collection in [
-                "Landsat TM-ETM-OLI Surface Reflectance",
-                "Sentinel-2 MSI Surface Reflectance",
+                "Landsat",
+                "Sentinel 2",
             ]:
                 gdf = gpd.GeoDataFrame(
                     index=[0], crs=crs, geometry=[landsat_rois[sample_roi]]
@@ -430,19 +430,19 @@ def app():
     with row1_col2:
 
         if collection in [
-            "Landsat TM-ETM-OLI Surface Reflectance",
-            "Sentinel-2 MSI Surface Reflectance",
+            "Landsat",
+            "Sentinel 2",
         ]:
 
-            if collection == "Landsat TM-ETM-OLI Surface Reflectance":
-                sensor_start_year = 1984
-                timelapse_title = "Landsat Timelapse"
+            if collection == "Landsat":
+                sensor_start_year = 2000
+                timelapse_title = "Landsat "
                 timelapse_speed = 5
-            elif collection == "Sentinel-2 MSI Surface Reflectance":
-                sensor_start_year = 2015
-                timelapse_title = "Sentinel-2 Timelapse"
+            elif collection == "Sentinel 2":
+                sensor_start_year = 2016
+                timelapse_title = "Sentinel 2"
                 timelapse_speed = 5
-            video_empty.video("https://youtu.be/VVRK_-dEjR4")
+            video_empty.video("https://www.youtube.com/watch?v=O8_WJIzN43E")
 
             with st.form("submit_landsat_form"):
 
@@ -452,34 +452,34 @@ def app():
                 out_gif = geemap.temp_file_path(".gif")
 
                 title = st.text_input(
-                    "Enter a title to show on the timelapse: ", timelapse_title
+                    "Titulo: ", timelapse_title
                 )
                 RGB = st.selectbox(
-                    "Select an RGB band combination:",
+                    "Elija una combinacion:",
                     [
-                        "Red/Green/Blue",
+ #                       "Red/Green/Blue",
                         "NIR/Red/Green",
-                        "SWIR2/SWIR1/NIR",
+ #                       "SWIR2/SWIR1/NIR",
                         "NIR/SWIR1/Red",
-                        "SWIR2/NIR/Red",
-                        "SWIR2/SWIR1/Red",
-                        "SWIR1/NIR/Blue",
-                        "NIR/SWIR1/Blue",
-                        "SWIR2/NIR/Green",
-                        "SWIR1/NIR/Red",
-                        "SWIR2/NIR/SWIR1",
-                        "SWIR1/NIR/SWIR2",
+  #                      "SWIR2/NIR/Red",
+   #                     "SWIR2/SWIR1/Red",
+    #                    "SWIR1/NIR/Blue",
+     #                   "NIR/SWIR1/Blue",
+      #                  "SWIR2/NIR/Green",
+ #                       "SWIR1/NIR/Red",
+ #                       "SWIR2/NIR/SWIR1",
+ #                       "SWIR1/NIR/SWIR2",
                     ],
                     index=9,
                 )
 
                 frequency = st.selectbox(
-                    "Select a temporal frequency:",
+                    "Frecuencia:",
                     ["year", "quarter", "month"],
                     index=0,
                 )
 
-                with st.expander("Customize timelapse"):
+                with st.expander("Ajustes"):
 
                     speed = st.slider("Frames per second:", 1, 30, timelapse_speed)
                     dimensions = st.slider(
