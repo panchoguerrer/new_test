@@ -20,8 +20,33 @@ def ee_authenticate(token_name="EARTHENGINE_TOKEN"):
     geemap.ee_initialize(token_name=token_name)
 
 
-
-landsat_rois = {
+landsat_rois = {"Pergamino": Polygon(
+    [
+        [-60.745468, -33.801974],
+        [-60.745468, -33.741471],
+        [-60.678177, -33.741471],
+        [-60.678177, -33.801974],
+        [-60.745468, -33.801974],
+    ]
+),
+    "Balcarce": Polygon(
+        [
+            [-58.266678, -37.709628],
+            [-58.266678, -37.685451],
+            [-58.215523, -37.685451],
+            [-58.215523, -37.709628],
+            [-58.266678, -37.709628],
+        ]
+),
+    "Traful": Polygon(
+        [
+            [-71.582794, -40.568589],
+            [-71.582794, -40.514321],
+            [-71.460228, -40.514321],
+            [-71.460228, -40.568589],
+            [-71.582794, -40.568589],
+        ]
+),
 
 }
 
@@ -310,59 +335,15 @@ def app():
             index=0,
         )
 
-        add_outline = st.checkbox(
-            "Divisiones administrativas", True
-        )
-
-        if add_outline:
-
-            with st.expander("Customize administrative boundary", False):
-
-                overlay_options = {
-                }
-
-                overlay = st.selectbox(
-                    "Select an administrative boundary:",
-                    list(overlay_options.keys()),
-                    index=2,
-                )
-
-                overlay_data = overlay_options[overlay]
-
-                if overlay_data is None:
-                    overlay_data = st.text_input(
-                        "Enter an HTTP URL to a GeoJSON file or an ee.FeatureCollection asset id:",
-                        "https://raw.githubusercontent.com/giswqs/geemap/master/examples/data/countries.geojson",
-                    )
-
-                overlay_color = st.color_picker(
-                    "Select a color for the administrative boundary:", "#000000"
-                )
-                overlay_width = st.slider(
-                    "Select a line width for the administrative boundary:", 1, 20, 1
-                )
-                overlay_opacity = st.slider(
-                    "Select an opacity for the administrative boundary:",
-                    0.0,
-                    1.0,
-                    1.0,
-                    0.05,
-                )
-        else:
-            overlay_data = None
-            overlay_color = "black"
-            overlay_width = 1
-            overlay_opacity = 1
-
     with row1_col1:
 
         with st.expander(
-            "Steps: Draw a rectangle on the map -> Export it as a GeoJSON -> Upload it back to the app -> Click the Submit button. Expand this tab to see a demo 👉"
+            "Instrucciones: localize su campo haciendo zoom -> dibuje el poligono del campo-> en el sector derecho vera un boton que dice 'export' -> exporte como GeoJSON en una locacion que recuerde -> subalo a la app "
         ):
             video_empty = st.empty()
 
         data = st.file_uploader(
-            "Upload a GeoJSON file to use as an ROI. Customize timelapse parameters and then click the Submit button 😇👇",
+            "Suba el archivo de su campo aqui",
             type=["geojson", "kml", "zip"],
         )
 
@@ -381,8 +362,8 @@ def app():
                 #     m.set_center(4.20, 18.63, zoom=2)
         else:
             if collection in [
-                "Landsat TM-ETM-OLI Surface Reflectance",
-                "Sentinel-2 MSI Surface Reflectance",
+                "Landsat",
+                "Sentinel 2",
             ]:
                 gdf = gpd.GeoDataFrame(
                     index=[0], crs=crs, geometry=[landsat_rois[sample_roi]]
