@@ -311,7 +311,7 @@ def app():
         )
 
         add_outline = st.checkbox(
-            "Divisiones administrativas", False
+            "Divisiones administrativas", True
         )
 
         if add_outline:
@@ -319,11 +319,7 @@ def app():
             with st.expander("Customize administrative boundary", False):
 
                 overlay_options = {
-                    "User-defined": None,
-                    "Continents": "continents",
-                    "Countries": "countries",
-                    "US States": "us_states",
-                    "China": "china",
+,
                 }
 
                 overlay = st.selectbox(
