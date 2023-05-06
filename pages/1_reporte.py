@@ -311,12 +311,12 @@ def app():
         )
 
         add_outline = st.checkbox(
-            "Overlay an administrative boundary on timelapse", False
+            "Divisiones administrativas", False
         )
 
         if add_outline:
 
-            with st.expander("Customize administrative boundary", True):
+            with st.expander("Customize administrative boundary", False):
 
                 overlay_options = {
                     "User-defined": None,
