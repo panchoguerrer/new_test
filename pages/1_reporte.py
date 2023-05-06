@@ -135,8 +135,7 @@ def app():
             "Landsat",
             "Sentinel 2",
         ]:
-            roi_options = ["Uploaded GeoJSON"] + \
-                list(landsat_rois.keys())
+            roi_options = ["Uploaded GeoJSON"] + list(landsat_rois.keys())
 
         elif collection == "Geostationary Operational Environmental Satellites (GOES)":
             roi_options = ["Uploaded GeoJSON"] + list(goes_rois.keys())
